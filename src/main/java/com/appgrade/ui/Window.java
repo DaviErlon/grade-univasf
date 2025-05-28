@@ -21,5 +21,6 @@ public class Window extends JFrame {
 
         setVisible(true);
     }
+
 }
 
