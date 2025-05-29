@@ -6,6 +6,7 @@ import java.awt.*;
 public class Window extends JFrame {
 
     private final ImageIcon icone = new ImageIcon("src/main/resources/imagens/icone.png");
+    private JPanel grade;
 
     public Window(){
         initialize();
@@ -18,6 +19,9 @@ public class Window extends JFrame {
         setSize(1000,700);
         setLocationRelativeTo(null);
         setIconImage(icone.getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        add(new GradeViewer());
 
         setVisible(true);
     }
