@@ -26,7 +26,7 @@ public abstract class Grade {
         updateRequisitoDe(cadeira.getKey(), pre);
     }
 
-    private void updateRequisitoDe(int cadeira, int[] preReqs) {
+    protected void updateRequisitoDe(int cadeira, int[] preReqs) {
         for (int preReq : preReqs) {
             int[] dependentes = requisitoDe.get(preReq);
 
