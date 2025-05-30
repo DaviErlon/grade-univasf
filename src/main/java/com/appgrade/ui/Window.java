@@ -6,7 +6,6 @@ import java.awt.*;
 public class Window extends JFrame {
 
     private final ImageIcon icone = new ImageIcon("src/main/resources/imagens/icone.png");
-    private JPanel grade;
 
     public Window(){
         initialize();
