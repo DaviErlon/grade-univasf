@@ -3,7 +3,7 @@ package com.appgrade.models;
 public class GradeCC extends Grade {
 
     public GradeCC() {
-        super();
+        super(8);
         int key = 1;
 
         addCadeira(new Cadeira("Introdução à Ciência da Computação", 1, key++));
@@ -64,5 +64,4 @@ public class GradeCC extends Grade {
         addCadeira(new Cadeira("Estágio Supervisionado", 8, key++));
         addCadeira(new Cadeira("Atividades Complementares", 8, key++));
     }
-
 }

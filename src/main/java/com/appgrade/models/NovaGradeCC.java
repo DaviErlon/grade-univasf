@@ -3,7 +3,7 @@ package com.appgrade.models;
 public class NovaGradeCC extends Grade {
 
 	public NovaGradeCC() {
-		super();
+		super(8);
 		int key = 1;
 
 		addCadeira(new Cadeira("Pragramação Imperativa", 1, key++));
