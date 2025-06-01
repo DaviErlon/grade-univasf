@@ -1,3 +1,6 @@
-\.idea
-\out
+/.classpath
+/.idea
+/.project
+/bin/
+/out
 grade-univasf.iml

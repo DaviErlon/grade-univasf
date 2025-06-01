@@ -13,14 +13,12 @@ public class Window extends JFrame {
 
     public void initialize(){
         setTitle("Grade Ciência da Computação");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
-        setSize(1000,700);
+        setSize(1100,600);
         setLocationRelativeTo(null);
         setIconImage(icone.getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH));
         setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        add(new GradeViewer());
 
         setVisible(true);
     }

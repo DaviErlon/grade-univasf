@@ -3,7 +3,7 @@ package com.appgrade.models;
 public class GradeProd extends Grade {
 
 	public GradeProd() {
-		super();
+		super(10);
 		int key = 1;
 
 		addCadeira(new Cadeira("Cálculo I", 1, key++));

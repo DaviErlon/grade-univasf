@@ -1,55 +1,52 @@
 package com.appgrade.models;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public abstract class Grade {
 
-    protected Map<Integer, Cadeira> disciplinas;
-    protected Map<Integer, int[]> preRequisito;
-    protected Map<Integer, int[]> requisitoDe;
+    private final Map<Integer, Cadeira> cadeiras;
+    private final Map<Integer, List<Integer>> prerequisitos;
+    private final Map<Integer, List<Integer>> dependentes;
+    private final int qntPeriodos;
 
-    public Grade(){
-        this.disciplinas = new HashMap<>();
-        this.preRequisito = new HashMap<>();
-        this.requisitoDe = new HashMap<>();
+    public Grade(int qntPeriodos){
+        this.qntPeriodos = qntPeriodos;
+        this.cadeiras = new HashMap<>();
+        this.prerequisitos = new HashMap<>();
+        this.dependentes = new HashMap<>();
     }
 
-    public void addCadeira(Cadeira cadeira){
-        this.disciplinas.put(cadeira.getKey(), cadeira);
+    public void addCadeira(Cadeira cadeira) {
+        if(cadeira.periodo() > qntPeriodos) return;
+        cadeiras.put(cadeira.key(), cadeira);
     }
 
-    public void addCadeira(Cadeira cadeira, int[] pre){
-        this.disciplinas.put(cadeira.getKey(), cadeira);
-        this.preRequisito.put(cadeira.getKey(), pre);
-        updateRequisitoDe(cadeira.getKey(), pre);
-    }
+    public void addCadeira(Cadeira cadeira, int[] prereqs) {
+        addCadeira(cadeira);
 
-    protected void updateRequisitoDe(int cadeira, int[] preReqs) {
-        for (int preReq : preReqs) {
-            int[] dependentes = requisitoDe.get(preReq);
-
-            if (dependentes == null) {
-                requisitoDe.put(preReq, new int[]{cadeira});
-            } else if (Arrays.stream(dependentes).noneMatch(d -> d == cadeira)) {
-                int[] novoDependentes = Arrays.copyOf(dependentes, dependentes.length + 1);
-                novoDependentes[dependentes.length] = cadeira;
-                requisitoDe.put(preReq, novoDependentes);
-            }
+        for (int prereq : prereqs) {
+            prerequisitos.computeIfAbsent(cadeira.key(), k -> new ArrayList<>()).add(prereq);
+            dependentes.computeIfAbsent(prereq, k -> new ArrayList<>()).add(cadeira.key());
         }
     }
 
-    public Map<Integer, Cadeira> getDisciplinas() {
-        return disciplinas;
+    public List<Integer> getPrerequisitos(int key) {
+        return prerequisitos.getOrDefault(key, List.of());
     }
 
-    public Map<Integer, int[]> getPreRequisito() {
-        return preRequisito;
+    public List<Integer> getDependentes(int key) {
+        return dependentes.getOrDefault(key, List.of());
     }
 
-    public Map<Integer, int[]> getRequisitoDe() {
-        return requisitoDe;
+    public Cadeira getCadeira(int key) {
+        return cadeiras.get(key);
     }
 
+    public Collection<Cadeira> getTodasCadeiras() {
+        return cadeiras.values();
+    }
 }
