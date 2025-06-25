@@ -1,43 +1,124 @@
 package com.appgrade.ui;
 
-import com.appgrade.models.GradeCC;
+import com.appgrade.models.*;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class GradeViewer extends JPanel {
-    // contem label 1 e 2 em forma de linhas
 
-    // -> label1
-    // contem a barra de porcentagem
+	private static final long serialVersionUID = 1L;
+	private final Map<Integer, Estado> estados = new HashMap<>();
+	private final Map<Integer, CadeiraViewer> botoes = new HashMap<>();
 
-    // -> label2 em forma de colunas
-    // contem os botões dos periodos
-    // contem os periodos em coluna
-    // periodos contem os botoes das cadeiras
-    private final GradeCC dadosGrade;
-    JPanel[] periodos;
+	public GradeViewer(Grade grade) {
+		int maxPeriodo = grade.getTodasCadeiras().stream().mapToInt(Cadeira::periodo).max().orElse(8);
 
-    public GradeViewer(){
+		setLayout(new GridLayout(1, maxPeriodo, 30, 10));
 
-        dadosGrade = new GradeCC();
-        periodos = new JPanel[8];
-        setLayout(new FlowLayout(FlowLayout.CENTER));
+		for (int periodo = 1; periodo <= maxPeriodo; periodo++) {
+			final int periodoFinal = periodo;
 
-        for(int i = 0; i < 8; i++) {
-            periodos[i] = new JPanel();
-            periodos[i].setLayout(new BoxLayout(periodos[i], BoxLayout.Y_AXIS));
-            periodos[i].setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        }
+			JPanel col = new JPanel();
+			col.setLayout(new BoxLayout(col, BoxLayout.Y_AXIS));
+			col.setBorder(BorderFactory.createTitledBorder("Período " + periodo));
 
-        dadosGrade.getDisciplinas().forEach((chave, valor) -> {
-            JButton button = new CadeiraViewer(valor.getNome());
-            periodos[valor.getPeriodo() - 1].add(button);
-            });
+			List<Cadeira> cadeiras = grade.getTodasCadeiras().stream().filter(c -> c.periodo() == periodoFinal)
+					.collect(Collectors.toList());
 
-        for(JPanel periodo : periodos){
-            add(periodo);
-            add(Box.createRigidArea(new Dimension(0, 10)));
-        }
+			for (Cadeira c : cadeiras) {
+				CadeiraViewer btn = new CadeiraViewer(c);
+				botoes.put(c.key(), btn);
+				estados.put(c.key(), Estado.PADRAO);
 
-    }
+				List<Integer> prereqs = grade.getPrerequisitos(c.key());
+				if (!prereqs.isEmpty()) {
+					String texto = "Pré-requisitos:\n" + prereqs.stream().map(id -> grade.getCadeira(id))
+							.filter(Objects::nonNull).map(Cadeira::nome).collect(Collectors.joining("\n"));
+					btn.setToolTipText("<html>" + texto.replaceAll("\n", "<br>") + "</html>");
+				}
+
+				btn.addActionListener(e -> {
+					Estado atual = estados.get(c.key());
+
+					if (atual == Estado.CONCLUIDA) {
+						desmarcarEDependentes(grade, c.key());
+					} else {
+						marcarComPreRequisitos(grade, c.key());
+					}
+
+					atualizarEstados(grade);
+					atualizarCores();
+				});
+
+				col.add(btn);
+				col.add(Box.createRigidArea(new Dimension(0, 5)));
+			}
+
+			add(col);
+		}
+
+		atualizarEstados(grade);
+		atualizarCores();
+	}
+
+	private void marcarComPreRequisitos(Grade grade, int key) {
+
+		if (estados.getOrDefault(key, Estado.PADRAO) == Estado.CONCLUIDA)
+			return;
+
+		estados.put(key, Estado.CONCLUIDA);
+
+		for (int prereq : grade.getPrerequisitos(key)) {
+			marcarComPreRequisitos(grade, prereq);
+		}
+	}
+
+	private void desmarcarEDependentes(Grade grade, int key) {
+		if (estados.getOrDefault(key, Estado.PADRAO) != Estado.CONCLUIDA)
+			return;
+
+		estados.put(key, Estado.PADRAO);
+
+		for (int dependente : grade.getDependentes(key)) {
+
+			List<Integer> prereqs = grade.getPrerequisitos(dependente);
+			boolean algumNaoConcluido = prereqs.stream()
+					.anyMatch(id -> estados.getOrDefault(id, Estado.PADRAO) != Estado.CONCLUIDA);
+
+			if (algumNaoConcluido) {
+				desmarcarEDependentes(grade, dependente);
+			}
+		}
+	}
+
+	private void atualizarEstados(Grade grade) {
+		for (Cadeira cadeira : grade.getTodasCadeiras()) {
+			int key = cadeira.key();
+
+			if (estados.get(key) == Estado.CONCLUIDA)
+				continue;
+
+			List<Integer> prereqs = grade.getPrerequisitos(key);
+			boolean liberada = prereqs.stream()
+					.allMatch(id -> estados.getOrDefault(id, Estado.PADRAO) == Estado.CONCLUIDA);
+
+			if (liberada) {
+				estados.put(key, Estado.LIBERADA);
+			} else {
+				estados.put(key, Estado.PADRAO);
+			}
+		}
+	}
+
+	private void atualizarCores() {
+		for (Map.Entry<Integer, CadeiraViewer> entry : botoes.entrySet()) {
+			int key = entry.getKey();
+			CadeiraViewer viewer = entry.getValue();
+			viewer.atualizarCor(estados.getOrDefault(key, Estado.PADRAO));
+		}
+	}
 }

@@ -1,42 +1,43 @@
 package com.appgrade.ui;
 
+import com.appgrade.models.Cadeira;
+import com.appgrade.models.Estado;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class CadeiraViewer extends JButton {
-    private static final int ARC_WIDTH = 12;
-    private static final int ARC_HEIGHT = 12;
 
-    public CadeiraViewer(String text) {
-        super(text);
-        setContentAreaFilled(false);
-        setFocusPainted(false);
-        setForeground(Color.WHITE);
-        setBackground(new Color(0, 120, 215)); // Azul
+    private static final long serialVersionUID = 1L;
+	private final int key;
 
-        setPreferredSize(new Dimension(100, 50));
-        setMaximumSize(new Dimension(100, 50));
-        setAlignmentX(Component.CENTER_ALIGNMENT);
+    public CadeiraViewer(Cadeira cadeira) {
+        super("<html><center>" + cadeira.nome() + "</center></html>");
+        this.key = cadeira.key();
+        setFocusable(false);
+        setMargin(new Insets(10, 10, 10, 10));
+        setPreferredSize(new Dimension(150, 60));
+        setMinimumSize(new Dimension(150, 60));
+        setMaximumSize(new Dimension(200, 80));
+
+        setFont(new Font("SansSerif", Font.BOLD, 12));
+        setForeground(Color.BLACK);
+        setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        setOpaque(true);
+        setContentAreaFilled(true);
+
+        atualizarCor(Estado.PADRAO);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), ARC_WIDTH, ARC_HEIGHT);
-
-        super.paintComponent(g);
-        g2.dispose();
+    public int getKey() {
+        return key;
     }
 
-    @Override
-    protected void paintBorder(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setColor(getBackground().darker());
-        g2.setStroke(new BasicStroke(1));
-        g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ARC_WIDTH, ARC_HEIGHT);
-        g2.dispose();
+    public void atualizarCor(Estado estado) {
+        switch (estado) {
+            case CONCLUIDA -> setBackground(new Color(0x007BFF));
+            case LIBERADA -> setBackground(new Color(0xD3D3D3));
+            default -> setBackground(new Color(0xF0F0F0));
+        }
     }
 }
