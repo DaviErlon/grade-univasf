@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+
+
+<fx:root id="periodos" alignment="TOP_CENTER" minWidth="1090.0" prefHeight="540.0" prefWidth="1130.0" spacing="10.0" type="HBox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" />

@@ -1,65 +1,71 @@
 package com.appgrade.models;
 
+import java.util.Set;
+
 public class NovaGradeCC extends Grade {
 
 	public NovaGradeCC() {
-		super(8);
-		int key = 1;
 
-		addCadeira(new Cadeira("Pragramação Imperativa", 1, key++));
-		addCadeira(new Cadeira("Fundamentos da Lógica Matemática", 1, key++));
-		addCadeira(new Cadeira("Introdução à Ciência da Computação", 1, key++));
-		addCadeira(new Cadeira("Matemática Elementar", 1, key++));
-		addCadeira(new Cadeira("Metodologia Científica", 1, key++));
+		addCadeira(1, "Programação Imperativa");
+		addCadeira(2, "Fundamentos da Lógica Matemática");
+		addCadeira(3, "Introdução à Ciência da Computação");
+		addCadeira(4, "Matemática Elementar");
+		addCadeira(5, "Metodologia Científica");
 
-		addCadeira(new Cadeira("Algoritmos e Estruturas de Dados", 2, key++), new int[] { 1 });
-		addCadeira(new Cadeira("Programação Orientada a Objetos", 2, key++));
-		addCadeira(new Cadeira("Geometria Analítica e Vetores ", 2, key++));
-		addCadeira(new Cadeira("Cálculo I", 2, key++), new int[] { 4 });
-		addCadeira(new Cadeira("Sistemas de Informação ", 2, key++));
-		addCadeira(new Cadeira("Projeto e Desenvolvimento de Software I", 2, key++));
+		setNextPeriodo();
 
-		addCadeira(new Cadeira("Sistemas Operacionais", 3, key++));
-		addCadeira(new Cadeira("Redes de Computadores", 3, key++));
-		addCadeira(new Cadeira("Banco de Dados", 3, key++));
-		addCadeira(new Cadeira("Cálculo II", 3, key++), new int[] { 9 });
-		addCadeira(new Cadeira("Administração Aplicada Projetos de Sistemas", 3, key++));
-		addCadeira(new Cadeira("Projeto e Desenvolvimento de Software II", 3, key++));
+		addCadeira(6, "Algoritmos e Estruturas de Dados", Set.of(1));
+		addCadeira(7, "Programação Orientada a Objetos");
+		addCadeira(8, "Geometria Analítica e Vetores");
+		addCadeira(9, "Cálculo I", Set.of(4));
+		addCadeira(10, "Sistemas de Informação");
+		addCadeira(11, "Desenvolvimento de Software I");
 
-		addCadeira(new Cadeira("Arquitetura e Organização de Computadores", 4, key++));
-		addCadeira(new Cadeira("Sistemas Distribuidos", 4, key++), new int[] { 12, 13 });
-		addCadeira(new Cadeira("Computação Inteligente", 4, key++), new int[] { 6 });
-		addCadeira(new Cadeira("Álgebra Linear", 4, key++), new int[] { 9 });
-		addCadeira(new Cadeira("Engenharia de Software", 4, key++), new int[] { 7 });
-		addCadeira(new Cadeira("Projeto e Desenvolvimento de Software III", 4, key++));
+		setNextPeriodo();
+		addCadeira(12, "Sistemas Operacionais");
+		addCadeira(13, "Redes de Computadores");
+		addCadeira(14, "Banco de Dados");
+		addCadeira(15, "Cálculo II", Set.of(9));
+		addCadeira(16, "Administração");
+		addCadeira(17, "Desenvolvimento de Software II");
 
-		addCadeira(new Cadeira("Linguagens Formais, Autômatos", 5, key++), new int[] { 2 });
-		addCadeira(new Cadeira("Análise de Algoritmos", 5, key++), new int[] { 6, 2 });
-		addCadeira(new Cadeira("Mecânica Clássica", 5, key++), new int[] { 8, 9, 15 });
-		addCadeira(new Cadeira("Estatística Básica", 5, key++), new int[] { 4, 9 });
-		addCadeira(new Cadeira("Empreendedorismo Tecnológico e Inovação Computacional", 5, key++));
-		addCadeira(new Cadeira("Projeto e Desenvolvimento de Software IV", 5, key++));
+		setNextPeriodo();
+		addCadeira(18, "Arquitetura de Computadores");
+		addCadeira(19, "Sistemas Distribuídos", Set.of(12, 13));
+		addCadeira(20, "Computação Inteligente", Set.of(6));
+		addCadeira(21, "Álgebra Linear", Set.of(9));
+		addCadeira(22, "Engenharia de Software", Set.of(7));
+		addCadeira(23, "Desenvolvimento de Software III");
 
-		addCadeira(new Cadeira("Computabilidade e Decibilidade", 6, key++), new int[] { 24 });
-		addCadeira(new Cadeira("Construção de Compiladores", 6, key++), new int[] { 24 });
-		addCadeira(new Cadeira("Aprendizado de Máquina", 6, key++), new int[] { 20, 27 });
-		addCadeira(new Cadeira("Eletromagnetismo Clássico", 6, key++), new int[] { 26 });
-		addCadeira(new Cadeira("Auditoria e Segurança de Dados", 6, key++));
-		addCadeira(new Cadeira("Projeto e Desenvolvimento de Software V", 6, key++));
+		setNextPeriodo();
+		addCadeira(24, "Linguagens Formais, Autômatos", Set.of(2));
+		addCadeira(25, "Análise de Algoritmos", Set.of(6, 2));
+		addCadeira(26, "Mecânica Clássica", Set.of(8, 9, 15));
+		addCadeira(27, "Estatística Básica", Set.of(4, 9));
+		addCadeira(28, "Empreendedorismo");
+		addCadeira(29, "Desenvolvimento de Software IV");
 
-		addCadeira(new Cadeira("Interação Humano-Computador", 7, key++), new int[] { 22 });
-		addCadeira(new Cadeira("Núcleo Temático", 7, key++));
-		addCadeira(new Cadeira("Projeto e Desenvolvimento de Software VI", 3, key++));
-		addCadeira(new Cadeira("Optativa I", 7, key++));
-		addCadeira(new Cadeira("Optativa II", 7, key++));
-		addCadeira(new Cadeira("Eletiva I", 7, key++));
+		setNextPeriodo();
+		addCadeira(30, "Computabilidade e Decidibilidade", Set.of(24));
+		addCadeira(31, "Construção de Compiladores", Set.of(24));
+		addCadeira(32, "Aprendizado de Máquina", Set.of(20, 27));
+		addCadeira(33, "Eletromagnetismo Clássico", Set.of(26));
+		addCadeira(34, "Auditoria e Segurança de Dados");
+		addCadeira(35, "Desenvolvimento de Software V");
 
-		addCadeira(new Cadeira("Trabalho de Conclusão de Curso", 8, key++));
-		addCadeira(new Cadeira("Optativa III", 8, key++));
-		addCadeira(new Cadeira("Optativa IV", 8, key++));
-		addCadeira(new Cadeira("Eletiva II", 8, key++));
-		addCadeira(new Cadeira("Atividades Complementares", 8, key++));
+		setNextPeriodo();
+		addCadeira(36, "Interação Humano Computador", Set.of(22));
+		addCadeira(37, "Núcleo Temático");
+		addCadeira(38, "Desenvolvimento de Software VI");
+		addCadeira(39, "Optativa I");
+		addCadeira(40, "Optativa II");
+		addCadeira(41, "Eletiva I");
 
+		setNextPeriodo();
+		addCadeira(42, "Trabalho de Conclusão de Curso");
+		addCadeira(43, "Optativa III");
+		addCadeira(44, "Optativa IV");
+		addCadeira(45, "Eletiva II");
+		addCadeira(46, "Atividades Complementares");
 	}
-
 }

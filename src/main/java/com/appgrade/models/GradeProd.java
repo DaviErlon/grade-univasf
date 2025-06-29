@@ -1,81 +1,88 @@
 package com.appgrade.models;
 
+import java.util.Set;
+
 public class GradeProd extends Grade {
 
 	public GradeProd() {
-		super(10);
-		int key = 1;
 
-		addCadeira(new Cadeira("Cálculo I", 1, key++));
-		addCadeira(new Cadeira("Geometria Analítica", 1, key++));
-		addCadeira(new Cadeira("Humanidade e Cidadania", 1, key++));
-		addCadeira(new Cadeira("Química Teórica", 1, key++));
-		addCadeira(new Cadeira("Química Prática", 1, key++));
-		addCadeira(new Cadeira("Metodologia e Expr. Técnica e Científica", 1, key++));
-		addCadeira(new Cadeira("Introdução a Engenharia de Produção", 1, key++));
+		addCadeira(1, "Cálculo I");
+		addCadeira(2, "Geometria Analítica");
+		addCadeira(3, "Humanidade e Cidadania");
+		addCadeira(4, "Química Teórica");
+		addCadeira(5, "Química Prática");
+		addCadeira(6, "Metodologia e Expr. Técnica e Científica");
+		addCadeira(7, "Introdução a Engenharia de Produção");
 
-		addCadeira(new Cadeira("Cálculo II", 2, key++), new int[] { 1 });
-		addCadeira(new Cadeira("Álgebra Linear", 2, key++), new int[] { 2 });
-		addCadeira(new Cadeira("Física Teórica I", 2, key++));
-		addCadeira(new Cadeira("Desenho Técnico", 2, key++));
-		addCadeira(new Cadeira("Economia", 2, key++));
-		addCadeira(new Cadeira("Evolução das Técnicas de Gestão", 2, key++));
-		addCadeira(new Cadeira("Ética e Exercício Profissional", 2, key++));
+		setNextPeriodo();
+		addCadeira(8, "Cálculo II", Set.of(1));
+		addCadeira(9, "Álgebra Linear", Set.of(2));
+		addCadeira(10, "Física Teórica I");
+		addCadeira(11, "Desenho Técnico");
+		addCadeira(12, "Economia");
+		addCadeira(13, "Evolução das Técnicas de Gestão");
+		addCadeira(14, "Ética e Exercício Profissional");
 
-		addCadeira(new Cadeira("Cálculo III", 3, key++), new int[] { 8 });
-		addCadeira(new Cadeira("Introdução a Ciência dos Materiais", 3, key++));
-		addCadeira(new Cadeira("Física Teórica II", 3, key++));
-		addCadeira(new Cadeira("Algoritmo e Programação", 3, key++));
-		addCadeira(new Cadeira("Estatística Básica", 3, key++));
-		addCadeira(new Cadeira("Custos Industriais", 3, key++));
+		setNextPeriodo();
+		addCadeira(15, "Cálculo III", Set.of(8));
+		addCadeira(16, "Introdução a Ciência dos Materiais");
+		addCadeira(17, "Física Teórica II");
+		addCadeira(18, "Algoritmo e Programação");
+		addCadeira(19, "Estatística Básica");
+		addCadeira(20, "Custos Industriais");
 
-		addCadeira(new Cadeira("Fenômenos de Transporte", 4, key++), new int[] { 15, 17 });
-		addCadeira(new Cadeira("Física Experimental A", 4, key++));
-		addCadeira(new Cadeira("Mecânica dos Sólidos", 4, key++));
-		addCadeira(new Cadeira("Cálculo Numérico", 4, key++));
-		addCadeira(new Cadeira("Engenharia Financeira", 4, key++));
-		addCadeira(new Cadeira("Estatística Para Engenharia de Produção", 4, key++), new int[] { 19 });
+		setNextPeriodo();
+		addCadeira(21, "Fenômenos de Transporte", Set.of(15, 17));
+		addCadeira(22, "Física Experimental A");
+		addCadeira(23, "Mecânica dos Sólidos");
+		addCadeira(24, "Cálculo Numérico");
+		addCadeira(25, "Engenharia Financeira");
+		addCadeira(26, "Estatística Para Engenharia de Produção", Set.of(19));
 
-		addCadeira(new Cadeira("Física Teórica III", 5, key++));
-		addCadeira(new Cadeira("Resistência dos Materiais", 5, key++));
-		addCadeira(new Cadeira("Pesquisa Operacional I", 5, key++));
-		addCadeira(new Cadeira("Engenharia de Métodos", 5, key++));
-		addCadeira(new Cadeira("Segurança do Trabalho", 5, key++));
-		addCadeira(new Cadeira("Análise de Investimentos", 5, key++), new int[] { 26 });
-		addCadeira(new Cadeira("Eletiva I", 5, key++));
+		setNextPeriodo();
+		addCadeira(27, "Física Teórica III");
+		addCadeira(28, "Resistência dos Materiais");
+		addCadeira(29, "Pesquisa Operacional I");
+		addCadeira(30, "Engenharia de Métodos");
+		addCadeira(31, "Segurança do Trabalho");
+		addCadeira(32, "Análise de Investimentos", Set.of(26));
+		addCadeira(33, "Eletiva I");
 
-		addCadeira(new Cadeira("Eletrotécnica", 6, key++));
-		addCadeira(new Cadeira("Logística", 6, key++));
-		addCadeira(new Cadeira("Planejamento e Controle da Produção I", 6, key++), new int[] { 19 });
-		addCadeira(new Cadeira("Gestão da Qualidade", 6, key++));
-		addCadeira(new Cadeira("Ergonomia", 6, key++));
-		addCadeira(new Cadeira("Pesquisa Operacional II", 6, key++), new int[] { 29 });
-		addCadeira(new Cadeira("Optativa I", 6, key++));
+		setNextPeriodo();
+		addCadeira(34, "Eletrotécnica");
+		addCadeira(35, "Logística");
+		addCadeira(36, "Planejamento e Controle da Produção I", Set.of(19));
+		addCadeira(37, "Gestão da Qualidade");
+		addCadeira(38, "Ergonomia");
+		addCadeira(39, "Pesquisa Operacional II", Set.of(29));
+		addCadeira(40, "Optativa I");
 
-		addCadeira(new Cadeira("Planejamento e Controle da Produção II", 7, key++));
-		addCadeira(new Cadeira("Gestão Ambiental", 7, key++));
-		addCadeira(new Cadeira("Engenharia do Produto", 7, key++));
-		addCadeira(new Cadeira("Simulação de Processos Produtivos", 7, key++), new int[] { 18 });
-		addCadeira(new Cadeira("Logística de Suprimentos", 7, key++));
-		addCadeira(new Cadeira("Optativa II", 7, key++));
+		setNextPeriodo();
+		addCadeira(41, "Planejamento e Controle da Produção II");
+		addCadeira(42, "Gestão Ambiental");
+		addCadeira(43, "Engenharia do Produto");
+		addCadeira(44, "Simulação de Processos Produtivos", Set.of(18));
+		addCadeira(45, "Logística de Suprimentos");
+		addCadeira(46, "Optativa II");
 
-		addCadeira(new Cadeira("Processos Industriais", 8, key++), new int[] { 4, 5 });
-		addCadeira(new Cadeira("Avaliação do Desempenho Organizacional", 8, key++), new int[] { 26 });
-		addCadeira(new Cadeira("Projeto de Fábrica", 8, key++), new int[] { 11, 36 });
-		addCadeira(new Cadeira("Gestão de Serviços", 8, key++));
-		addCadeira(new Cadeira("Eletiva II", 8, key++));
-		addCadeira(new Cadeira("Logística de Distribuição", 8, key++));
+		setNextPeriodo();
+		addCadeira(47, "Processos Industriais", Set.of(4, 5));
+		addCadeira(48, "Avaliação do Desempenho Organizacional", Set.of(26));
+		addCadeira(49, "Projeto de Fábrica", Set.of(11, 36));
+		addCadeira(50, "Gestão de Serviços");
+		addCadeira(51, "Eletiva II");
+		addCadeira(52, "Logística de Distribuição");
 
-		addCadeira(new Cadeira("Inovação e Informação", 9, key++));
-		addCadeira(new Cadeira("Controle Estatístico de Qualidade", 9, key++), new int[] { 26 });
-		addCadeira(new Cadeira("Gestão de Projetos", 9, key++));
-		addCadeira(new Cadeira("Empreendedorismo", 9, key++));
-		addCadeira(new Cadeira("Projeto de TCC", 9, key++));
-		addCadeira(new Cadeira("Núcleo Temático", 9, key++));
+		setNextPeriodo();
+		addCadeira(53, "Inovação e Informação");
+		addCadeira(54, "Controle Estatístico de Qualidade", Set.of(26));
+		addCadeira(55, "Gestão de Projetos");
+		addCadeira(56, "Empreendedorismo");
+		addCadeira(57, "Projeto de TCC");
+		addCadeira(58, "Núcleo Temático");
 
-		addCadeira(new Cadeira("Trabalho de Conclusão de Curso (TCC)", 10, key++));
-		addCadeira(new Cadeira("Estágio Curricular", 10, key++));
-
+		setNextPeriodo();
+		addCadeira(59, "Trabalho de Conclusão de Curso (TCC)");
+		addCadeira(60, "Estágio Curricular");
 	}
-
 }
