@@ -2,6 +2,7 @@ package com.appgrade.ui;
 
 import com.appgrade.models.Grade;
 import com.appgrade.utils.Click;
+import com.appgrade.utils.ClickBarra;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 
@@ -13,6 +14,8 @@ public class GradeController extends HBox {
     private Map<Integer, CadeiraController> cad;
     private Map<Integer, Set<Integer>> pre;
     private Map<Integer, Set<Integer>> dep;
+
+    private ClickBarra clickBarra;
 
     public GradeController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/grade.fxml"));
@@ -56,11 +59,11 @@ public class GradeController extends HBox {
                 for (int preRequisiteId : percorrerGrafo(pre, id, false)) {
                     cad.get(preRequisiteId).selecionar();
                 }
-                c.selecionar(); // Seleciona a própria cadeira clicada
             }
 
             // Após qualquer mudança, recalcula a disponibilidade de TODAS as cadeiras.
             atualizarDisponibilidadeDaGrade();
+
         };
 
         Map<Integer, Set<Integer>> periodos = g.getPer();
@@ -106,6 +109,9 @@ public class GradeController extends HBox {
         for (CadeiraController c : cad.values()) {
             c.setPodeCursar(podeSerCursado(c.getKey()));
         }
+        if(clickBarra != null){
+            clickBarra.run(persCurso());
+        }
     }
 
     private Set<Integer> percorrerGrafo(Map<Integer, Set<Integer>> grafo, int inicio, boolean condicaoClicado) {
@@ -126,5 +132,29 @@ public class GradeController extends HBox {
         for (int vizinho : vizinhos) {
             dfs(vizinho, grafo, visitados, condicaoClicado);
         }
+    }
+
+    public double persCurso(){
+        int t = cad.size();
+        int i = 0;
+        for(CadeiraController c : cad.values()){
+            if(c.isClicado()){
+                i++;
+            }
+        }
+        return (double) i / t;
+    }
+
+    public void reset(){
+        for(CadeiraController c : cad.values()){
+            if(c.isClicado()){
+                c.desmarcar();
+            }
+        }
+        atualizarDisponibilidadeDaGrade();
+    }
+
+    public void setClickBarra(ClickBarra clickBarra) {
+        this.clickBarra = clickBarra;
     }
 }

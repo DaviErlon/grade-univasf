@@ -1,7 +1,6 @@
 package com.appgrade;
 
-import com.appgrade.models.GradeCC;
-import com.appgrade.ui.GradeController;
+import com.appgrade.ui.InicialController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -12,11 +11,16 @@ public class Main extends Application {
         launch(args);
     }
 
+
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(GradeController.create(new GradeCC()));
+        InicialController telaInicial = InicialController.create();
+        Scene scene = new Scene(telaInicial);
+        telaInicial.fixarCena();
+
         stage.setScene(scene);
-        stage.setTitle("Tela da Grade");
+        stage.centerOnScreen();
+        stage.setResizable(false);
         stage.show();
     }
 }

@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 
@@ -74,5 +76,19 @@ public class PeriodoController extends VBox {
                 }
             }
         }
+    }
+
+    @FXML
+    private void mudarCor(MouseEvent e){
+        Button btn = (Button) e.getSource();
+        ColorAdjust efeito = new ColorAdjust();
+        efeito.setBrightness(-0.08); // escurece um pouco (mais negativo = mais escuro)
+        btn.setEffect(efeito);
+    }
+
+    @FXML
+    private void voltarCor(MouseEvent e){
+        Button btn = (Button) e.getSource();
+        btn.setEffect(null); // remove o efeito
     }
 }

@@ -4,6 +4,8 @@ import com.appgrade.utils.Click;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.event.ActionEvent;
 
@@ -54,6 +56,20 @@ public class CadeiraController extends StackPane {
         }
     }
 
+    @FXML
+    private void mudarCor(MouseEvent e){
+        Button btn = (Button) e.getSource();
+        ColorAdjust efeito = new ColorAdjust();
+        efeito.setBrightness(-0.08); // escurece um pouco (mais negativo = mais escuro)
+        btn.setEffect(efeito);
+    }
+
+    @FXML
+    private void voltarCor(MouseEvent e){
+        Button btn = (Button) e.getSource();
+        btn.setEffect(null); // remove o efeito
+    }
+
     // --- MÉTODOS PÚBLICOS PARA GERENCIAR O ESTADO ---
 
     public void selecionar() {
@@ -96,7 +112,7 @@ public class CadeiraController extends StackPane {
      * Este método é privado, pois é um detalhe de implementação.
      */
     private void atualizarEstilo() {
-        // Estilo base que será mantido em todos os estados, vindo do seu FXML.
+        // Estilo base que será mantido em todos os estados, vindo do FXML.
         final String baseStyle = "-fx-background-radius: 8; ";
 
         String styleCompleto;

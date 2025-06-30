@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="StackPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx/17.0.15" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="cadeira" mnemonicParsing="false" onAction="#eventClick" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 8; -fx-background-color: #DCDCDC;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="cadeira" mnemonicParsing="false" onAction="#eventClick" onMouseEntered="#mudarCor" onMouseExited="#voltarCor" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 8; -fx-background-color: #DCDCDC;" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="11.0" />
          </font>
