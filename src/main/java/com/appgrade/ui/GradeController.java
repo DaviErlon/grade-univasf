@@ -68,12 +68,11 @@ public class GradeController extends HBox {
 
         Map<Integer, Set<Integer>> periodos = g.getPer();
         Map<Integer, String> cadeiras = g.getCad();
-        // Sugestão da análise anterior aplicada aqui para obter o número correto de períodos.
-        int p = g.getQntPeriodos(); // Supondo que Grade.java foi corrigido para return p;
+        int p = g.getQntPeriodos();
 
         for(int i = 1; i <= p; i++){
             PeriodoController x = PeriodoController.create(i);
-            // periodos.getOrDefault(i, Set.of()) -> usa o 'i' diretamente se os períodos forem 1-based
+
             for(int id : periodos.getOrDefault(i, Set.of())){
                 boolean podeCursarInicialmente = !this.pre.containsKey(id);
                 CadeiraController c = CadeiraController.create(id, cadeiras.get(id), onCadeiraClicked, podeCursarInicialmente);

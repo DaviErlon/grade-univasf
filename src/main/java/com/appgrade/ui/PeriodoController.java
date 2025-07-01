@@ -45,11 +45,11 @@ public class PeriodoController extends VBox {
         for(Node node : this.getChildren()){
             if (node instanceof CadeiraController c){
                 if(primeiro){
-                    // Usa o getter em vez do acesso direto
+
                     estadoInicial = c.isClicado();
                     primeiro = false;
                 } else {
-                    // Usa o getter em vez do acesso direto
+
                     if(estadoInicial != c.isClicado()){
                         return false;
                     }
